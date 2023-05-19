@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+    {% block content %}
+    <nav class="bt bb tc mw7 center mt4">
+        <a class="f6 f5-l link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" href = {% url 'home' %}>Home</a>
+        <a class="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" href={% url 'add_deck' %}>Add a New Deck</a>
+        <a class="f6 f5-l link bg-animate black-80 hover-bg-light-blue dib pa3 ph4-l" href={% url 'add_card' %}>Add a New Card</a>
+        
+      </nav>
+        <body>
+                {% for deck in Deck %}
+                    <article class="fl w-100 w-50-m  w-25-ns pa2-ns">
+                        <div class="aspect-ratio aspect-ratio--1x1">
+                        <img src="{{ deck.image }}" class="db bg-center cover aspect-ratio--object"/>
+                        </div>
+                        <a href="#0" class="ph2 ph0-ns pb3 link db">
+                        <h3 class="f5 f4-ns mb0 black-90"><a href="{% url 'deck_detail' pk=deck.pk %}"> {{deck.title}} </a></h3>
+                        </a>
+                    </article>    
+                {% endfor %}
+        </body>
+    {% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+        <nav class="bt bb tc mw7 center mt4">
+                <a class="f6 f5-l link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" href = {% url 'home' %}>Home</a>
+                <a class="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" href={% url 'add_deck' %}>Add a New Deck</a>
+                <a class="f6 f5-l link bg-animate black-80 hover-bg-light-blue dib pa3 ph4-l" href={% url 'add_card' %}>Add a New Card</a>
+                <a class="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" href="{% url 'edit_deck' pk=deck.pk %}">Edit Deck</a>
+                <a class="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" href="{% url 'delete_deck' pk=deck.pk %}">Delete Deck</a>
+        </nav>    
+            <h2>Deck Details</h2>
+
+                
+                    <p>{{ deck.title }}</p>
+                    <p>{{ deck.user }}</p>
+                    <p><img src= "{{ deck.image }}" /></p>
+
+                    {% for card in deck.cards.all %}
+                        <p>
+                                <a href="{% url 'edit_card' pk=card.pk %}"> {{ card }} </a>
+                        </p>
+                        
+                        {% endfor %}
+                        <form id='card-form' class='tl' action= "{% url 'ajax_add_card' %}" method="post">
+                                {% csrf_token %}
+                                {{ CardForm.as_p }}
+                                <input type="text" name="card-name" id="card-name">
+                                <button type="submit">Add Card</button>
+                        </form>
+        
+    {% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+    {% block content %}
+    <nav class="bt bb tc mw7 center mt4">
+        <a class="f6 f5-l link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" href = {% url 'home' %}>Home</a>
+        <a class="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" href={% url 'add_deck' %}>Add a New Deck</a>
+        <a class="f6 f5-l link bg-animate black-80 hover-bg-light-blue dib pa3 ph4-l" href={% url 'add_card' %}>Add a New Card</a>
+        
+      </nav>
+        <body>
+            <h2>Add Deck</h2>
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="Submit">Save</button>
+                </form>
+        </body>
+    {% endblock %}
